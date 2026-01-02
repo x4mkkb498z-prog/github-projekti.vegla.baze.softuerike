@@ -1,0 +1,67 @@
+saveToFile();
+                cout << "Libri u kthye.\n";
+            }
+            return;
+        }
+    }
+    cout << "Libri nuk u gjet.\n";
+}
+
+
+int main() {
+    loadFromFile();
+
+    int choice;
+    do {
+        cout << "\n===== LIBRARY MANAGEMENT SYSTEM =====\n";
+        cout << "1. Shto liber\n";
+        cout << "2. Shfaq librat\n";
+        cout << "3. Kerko liber\n";
+        cout << "4. Huazo liber\n";
+        cout << "5. Kthe liber\n";
+        cout << "0. Dil\n";
+        cout << "Zgjedhja: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: addBook(); break;
+            case 2: showBooks(); break;
+            case 3: searchBook(); break;
+            case 4: borrowBook(); break;
+            case 5: returnBook(); break;
+            case 0: cout << "Dalje nga programi.\n"; break;
+            default: cout << "Zgjedhje e pavlefshme.\n";
+        }
+    } 
+    while (choice != 0);
+
+    return 0;
+}
+# Library Management System – C++
+
+## Përshkrimi
+Ky projekt është një sistem për menaxhimin e librave në C++.
+Ruajtja e të dhënave bëhet në file `books.txt`.  
+Projekt i zhvilluar me GitHub: branches, Pull Requests, commits të strukturuara.
+
+## Funksionalitete
+- Shtim librash
+- Shfaqje librash
+- Kërkim sipas ISBN
+- Huazim librash
+- Kthim librash
+- Ruajtje dhe lexim nga file
+
+## Si ta ekzekutosh
+```bash
+g++ main.cpp -o library
+./library
+
+---
+
+## 🟦 **3️⃣ books.txt**
+```txt
+9780131103627,C Programming Language,Dennis Ritchie,0
+9780321563842,Effective C++,Scott Meyers,1
+9780201633610,Design Patterns,Erich Gamma,0
+
