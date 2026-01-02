@@ -1,2 +1,67 @@
-# github-projekti.vegla.baze.softuerike
-projekti i punimit te nje kodi ne github
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+struct Book {
+    string isbn;
+    string title;
+    string author;
+    bool isBorrowed;
+};
+
+vector<Book> books;
+
+
+void saveToFile() {
+    ofstream file("books.txt");
+    for (auto &b : books) {
+        file << b.isbn << ","
+             << b.title << ","
+             << b.author << ","
+             << b.isBorrowed << endl;
+    }
+    file.close();
+}
+
+void loadFromFile() {
+    books.clear();
+    ifstream file("books.txt");
+    string line;
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        Book b;
+        string borrowed;
+
+        getline(ss, b.isbn, ',');
+        getline(ss, b.title, ',');
+        getline(ss, b.author, ',');
+        getline(ss, borrowed, ',');
+
+        b.isBorrowed = (borrowed == "1");
+        books.push_back(b);
+    }
+    file.close();
+}
+
+
+void addBook() {
+    Book b;
+    cout << "ISBN: ";
+    cin >> b.isbn;
+    cin.ignore();
+
+    cout << "Titulli: ";
+    getline(cin, b.title);
+
+    cout << "Autori: ";
+    getline(cin, b.author);
+
+    b.isBorrowed = false;
+    books.push_back(b);
+    saveToFile();
+
+    cout << "Libri u shtua.\n";
