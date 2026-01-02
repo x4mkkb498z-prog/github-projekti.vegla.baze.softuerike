@@ -1,0 +1,67 @@
+}
+
+void showBooks() {
+    if (books.empty()) {
+        cout << "Nuk ka libra.\n";
+        return;
+    }
+
+    for (auto &b : books) {
+        cout << "ISBN: " << b.isbn
+             << " | Titulli: " << b.title
+             << " | Autori: " << b.author
+             << " | Statusi: "
+             << (b.isBorrowed ? "Huazuar" : "I lire")
+             << endl;
+    }
+}
+
+void searchBook() {
+    string isbn;
+    cout << "Jep ISBN: ";
+    cin >> isbn;
+
+    for (auto &b : books) {
+        if (b.isbn == isbn) {
+            cout << "Titulli: " << b.title
+                 << " | Autori: " << b.author
+                 << " | Statusi: "
+                 << (b.isBorrowed ? "Huazuar" : "I lire")
+                 << endl;
+            return;
+        }
+    }
+    cout << "Libri nuk u gjet.\n";
+}
+
+void borrowBook() {
+    string isbn;
+    cout << "ISBN: ";
+    cin >> isbn;
+
+    for (auto &b : books) {
+        if (b.isbn == isbn) {
+            if (b.isBorrowed) {
+                cout << "Libri eshte tashme i huazuar.\n";
+            } else {
+                b.isBorrowed = true;
+                saveToFile();
+                cout << "Libri u huazua.\n";
+            }
+            return;
+        }
+    }
+    cout << "Libri nuk u gjet.\n";
+}
+
+void returnBook() {
+    string isbn;
+    cout << "ISBN: ";
+    cin >> isbn;
+
+    for (auto &b : books) {
+        if (b.isbn == isbn) {
+            if (!b.isBorrowed) {
+                cout << "Libri nuk eshte i huazuar.\n";
+            } else {
+                b.isBorrowed = false;
